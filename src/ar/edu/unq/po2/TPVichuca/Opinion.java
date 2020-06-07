@@ -1,11 +1,12 @@
 package ar.edu.unq.po2.TPVichuca;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 public class Opinion {
 
 	private Usuario user;
-	private Calendar fechaEnviada = Calendar.getInstance();
+	private LocalDate fechaEnviada = LocalDate.now();
 	private IClasificacion respuesta;
 
 	public Opinion(Usuario user, IClasificacion respuesta) {
@@ -14,11 +15,11 @@ public class Opinion {
 		this.setRespuesta(respuesta);
 	}
 	
-	public Calendar getFechaEnviada() {
+	public LocalDate getFechaEnviada() {
 		return fechaEnviada;
 	}
 
-	public void setFechaEnviada(Calendar fechaEnviada) {
+	public void setFechaEnviada(LocalDate fechaEnviada) {
 		this.fechaEnviada = fechaEnviada;
 	}
 

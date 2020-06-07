@@ -27,7 +27,7 @@ public class Conocimiento implements IConocimiento {
 		this.tipoDeConocimiento = tipoDeConocimiento;
 	}
 
-	public boolean muestraActaParaValorar(Usuario user,Muestra muestra) {
+	public boolean muestraAptaParaValorar(Usuario user,Muestra muestra) {
 		return muestra.getUser() != user ;
 	}	
 	

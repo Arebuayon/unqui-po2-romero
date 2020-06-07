@@ -12,7 +12,7 @@ public class ConocimientoBasico extends Conocimiento {
 	}
 
 	public void valorarMuestra(Usuario user,Muestra muestra,Opinion opinion) {
-		if(this.getTipoDeVerificacion().puedeOpinarSobreLa(muestra) && this.muestraActaParaValorar(user, muestra)) {
+		if(this.getTipoDeVerificacion().puedeOpinarSobreLa(muestra) && this.muestraAptaParaValorar(user, muestra)) {
 			muestra.getOpiniones().add(opinion);
 		}
 	}

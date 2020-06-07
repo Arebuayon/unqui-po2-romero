@@ -10,7 +10,7 @@ public class ConocimientoEspecialista extends Conocimiento {
 	}
 	
 	public void valorarMuestra(Usuario user,Muestra muestra,Opinion opinion) {
-		if(this.esExperto() && this.muestraActaParaValorar(user, muestra)) {
+		if(this.esExperto() && this.muestraAptaParaValorar(user, muestra)) {
 			muestra.getOpiniones().add(opinion);
 		}
 	}

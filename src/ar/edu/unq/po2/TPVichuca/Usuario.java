@@ -46,7 +46,7 @@ public class Usuario {
 	}
 	
 	public void recibirEvaluacionDeConocimiento(Historial historial,Usuario user) {
-		historial.getEvaluador().cambiarConocimiento(historial, this);
+		historial.getEvaluador().reClasificarUsuario(user, historial);
 	}
 
 }

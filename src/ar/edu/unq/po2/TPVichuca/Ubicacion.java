@@ -41,7 +41,7 @@ public class Ubicacion {
         return distancia;  
     }  
 	
-	public double distanciaEntreUbicaciones(Ubicacion ubicacion2) {         
+	public double distanciaAOtraUbicacion(Ubicacion ubicacion2) {         
         double distanciaEntre2Ubicaciones = distanciaCoord(this.getLatitud(),this.getLongitud(),ubicacion2.getLatitud(),ubicacion2.getLongitud());
         return distanciaEntre2Ubicaciones;
     }  

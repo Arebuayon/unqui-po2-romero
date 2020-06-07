@@ -1,6 +1,7 @@
 package ar.edu.unq.po2.TPVichuca;
 
 import java.awt.image.BufferedImage;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -9,7 +10,7 @@ public class Muestra {
 	private Usuario user;
 	private BufferedImage fotoDelInsecto;
 	private Ubicacion ubicacion;
-	private Calendar fechaCreada;
+	private LocalDate fechaCreada;
 	private Verificacion verificado;
 	private ArrayList<Opinion> listaDeOpiniones = new ArrayList<Opinion>();
 	
@@ -20,7 +21,7 @@ public class Muestra {
 		this.user = user;
 		this.fotoDelInsecto = fotoDelInsecto;
 		this.ubicacion = ubicacion;
-		this.fechaCreada = Calendar.getInstance();;
+		this.fechaCreada = LocalDate.now();
 		this.listaDeOpiniones.add(opinion);
 	}
 
@@ -48,11 +49,11 @@ public class Muestra {
 		return listaDeOpiniones;
 	}
 	
-	public Calendar getFechaCreada() {
+	public LocalDate getFechaCreada() {
 		return fechaCreada;
 	}
 
-	public void setFechaCreada(Calendar fechaCreada) {
+	public void setFechaCreada(LocalDate fechaCreada) {
 		this.fechaCreada = fechaCreada;
 	}
 	public Verificacion getVerificado() {
@@ -108,7 +109,7 @@ public class Muestra {
 		 	}
 		 return OpinionesDe ;
 	}
-	
+		
 	public Integer cantidadDeExpertosQueOpinaron(){
 		Integer contador = 0;
 		 	for(Opinion respueta : this.getOpiniones()){
@@ -118,5 +119,5 @@ public class Muestra {
 		 	}
 		 return contador;
 	}
-
+	 
 }
