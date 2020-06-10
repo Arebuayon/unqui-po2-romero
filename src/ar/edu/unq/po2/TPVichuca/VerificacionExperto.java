@@ -39,6 +39,7 @@ public class VerificacionExperto extends Verificacion{
 	public void verificar(Muestra muestra) {
 		 if(this.masDe2votoPorUnaOpinion(muestra)) {
 			 muestra.setVerificado(new VerificacionExperto(true));
+			 muestra.setNivelDeVerificacion("verificada");
 		 }
 	}
 	

@@ -8,11 +8,10 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
-	<classpathentry kind="lib" path="C:/Users/Olga/Desktop/Mockito_3.3.3/mockito-core-3.3.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Olga/Desktop/Mockito_3.3.3/byte-buddy-1.10.10.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Olga/Desktop/Mockito_3.3.3/byte-buddy-agent-1.10.10.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Olga/Desktop/Mockito_3.3.3/mockito-core-3.3.3-sources.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Olga/Desktop/Mockito_3.3.3/objenesis-2.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Tobias/Downloads/Mockito_3.3.3/mockito-core-3.3.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Tobias/Downloads/Mockito_3.3.3/byte-buddy-1.10.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Tobias/Downloads/Mockito_3.3.3/byte-buddy-agent-1.10.10.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Tobias/Downloads/Mockito_3.3.3/objenesis-2.6.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/Tobias/Downloads/Mockito_3.3.3/mockito-core-3.3.3-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

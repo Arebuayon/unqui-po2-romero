@@ -4,11 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FiltroPorFechaDeCreacion extends FiltroDeMuestra {
+public class FiltroPorFechaDeCreacionMenorA extends FiltroDeMuestra {
 	
 	LocalDate fecha;
 	
-	public FiltroPorFechaDeCreacion(LocalDate unaFecha) {
+	public FiltroPorFechaDeCreacionMenorA(LocalDate unaFecha) {
 		this.fecha = unaFecha;
 		
 	}
@@ -16,7 +16,7 @@ public class FiltroPorFechaDeCreacion extends FiltroDeMuestra {
 	@Override
 	public List<Muestra> filtrar(List<Muestra> muestras) {
 		
-		return muestras.stream().filter(muestra -> muestra.getFechaCreada()== this.fecha).collect(Collectors.toList());
+		return muestras.stream().filter(muestra -> muestra.getFechaCreada().isBefore(this.fecha)).collect(Collectors.toList());
 	}
 
 }

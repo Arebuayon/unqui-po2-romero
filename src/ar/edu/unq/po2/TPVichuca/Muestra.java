@@ -4,6 +4,10 @@ import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Muestra {
 	
@@ -13,6 +17,7 @@ public class Muestra {
 	private LocalDate fechaCreada;
 	private Verificacion verificado;
 	private ArrayList<Opinion> listaDeOpiniones = new ArrayList<Opinion>();
+	private String nivelDeVerificacion; 
 	
 	
 	
@@ -32,7 +37,15 @@ public class Muestra {
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
 	}
-
+	
+	public void setNivelDeVerificacion(String nivel){
+		this.nivelDeVerificacion = nivel;
+		
+	}
+	
+	public String getNivelDeVerificacion(){
+		return this.nivelDeVerificacion;
+	}
 	public BufferedImage getFotoDelInsecto() {
 		return fotoDelInsecto;
 	}
@@ -62,8 +75,10 @@ public class Muestra {
 
 	public void setVerificado(Verificacion verificado) {
 		this.verificado = verificado;
+		Historial.getHistorial().notificarZonasPorNuevaValidacion(this);
 	}
 	
+		
 	public Opinion opinionActual() {
 		return this.getVerificado().opinionActual(this);
 	}
@@ -118,6 +133,17 @@ public class Muestra {
 		 		}
 		 	}
 		 return contador;
+	}
+	
+	public LocalDate getFechaDeUltimaVotacion() {
+		LocalDate maxDate = this.fechasDeOpiniones().stream()
+                .max( Comparator.comparing( LocalDate::toEpochDay ) )
+                .get();
+		return maxDate;
+	}
+
+	private List<LocalDate> fechasDeOpiniones() {
+		return this.getOpiniones().stream().map(opinion -> opinion.getFechaEnviada()).collect(Collectors.toList());
 	}
 	 
 }

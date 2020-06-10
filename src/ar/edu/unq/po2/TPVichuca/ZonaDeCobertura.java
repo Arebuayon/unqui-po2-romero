@@ -8,6 +8,15 @@ import java.util.ArrayList;
 		private Integer radio;
 		private ArrayList<Organizacion> organizacionesSuscribidas;	
 
+	public ZonaDeCobertura(String nombre , Ubicacion ubicacion , Integer radio) {
+		this.nombre = nombre;
+		this.epicentro = ubicacion;
+		this.radio = radio;
+		this.organizacionesSuscribidas = new ArrayList<Organizacion>;
+		
+	}
+		
+		
 	public String getNombre(){
 		return nombre;
 	}
@@ -52,6 +61,11 @@ import java.util.ArrayList;
 	public void notificarOrganizacionesPorNuevaMuestra(Muestra muestra) {
 		
 		this.organizacionesSuscribidas.forEach(organizacion -> organizacion.ejecutarFuncionalidadDeNuevaMuestra(muestra, this));
+	}
+
+	public void notificarOrganizacionesPorNuevaValidacion(Muestra muestra) {
+		
+		this.organizacionesSuscribidas.forEach(organizacion -> organizacion.ejecutarFuncionalidadDeNuevaValidacion(muestra, this));
 	}
 
 

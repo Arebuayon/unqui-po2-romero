@@ -37,6 +37,11 @@ public  class Organizacion {
 	public void ejecutarFuncionalidadDeNuevaMuestra(Muestra muestra, ZonaDeCobertura zona) {
 		this.funcionalidadExternaParaNuevaMuestra.nuevoEvento(this, zona, muestra);
 	}
+
+	public void ejecutarFuncionalidadDeNuevaValidacion(Muestra muestra, ZonaDeCobertura zonaDeCobertura) {
+		
+		this.funcionalidadExternaParaValidacion.nuevoEvento(this, zonaDeCobertura, muestra); ;
+	}
 	
 	
 }

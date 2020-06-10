@@ -4,16 +4,23 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Historial {
 	
-	private ArrayList<Muestra> listaDeMuestras;
+	private List<Muestra> listaDeMuestras;
 	private EvaluadorDeConocimiento evaluador;
 	private ArrayList<ZonaDeCobertura> listaDeZonas;
-	
+	private static  Historial miHistorial;
 
-	public Historial() {
+	public static Historial getHistorial() {
+		if (miHistorial==null) {
+			miHistorial = new Historial();
+		}
+		return miHistorial;
+	}	
+	private Historial() {	
 		this.listaDeMuestras = new ArrayList<Muestra>();
 		this.evaluador = new EvaluadorDeConocimiento();
 		this.listaDeZonas = new ArrayList<ZonaDeCobertura>();
@@ -26,7 +33,7 @@ public class Historial {
 	public void setEvaluador(EvaluadorDeConocimiento evalu) {
 		evaluador = evalu;
 	}
-	public ArrayList<Muestra> getListaDeMuestras() {
+	public List<Muestra> getListaDeMuestras() {
 		return listaDeMuestras;
 	}
 
@@ -41,6 +48,11 @@ public class Historial {
 		List<ZonaDeCobertura> zonasDeLaMuestra = this.listaDeZonas.stream().filter(zona -> perteneceMuestraAZona(zona , muestra)).collect(Collectors.toList());
 		zonasDeLaMuestra.forEach(zona -> zona.notificarOrganizacionesPorNuevaMuestra(muestra));
 		
+	}
+	
+	public void notificarZonasPorNuevaValidacion(Muestra muestra) {
+		List<ZonaDeCobertura> zonasDeLaMuestra = this.listaDeZonas.stream().filter(zona -> perteneceMuestraAZona(zona , muestra)).collect(Collectors.toList());
+		zonasDeLaMuestra.forEach(zona -> zona.notificarOrganizacionesPorNuevaValidacion(muestra));
 	}
 
 	public List<Muestra> muestrasDeZona(ZonaDeCobertura zona){
@@ -88,7 +100,8 @@ public class Historial {
 		return listaDeOpinionesDe;
 	}
 
-
+	
+		
 	public List<Opinion> opinionesHace30DiasDe(Usuario user) {		
 		LocalDate fechaActual = LocalDate.now();
 		return this.opinionesDe(user).stream()
@@ -115,7 +128,12 @@ public class Historial {
 				.collect(Collectors.toList());
 		
 	}
-
 	
-
+	public List<Muestra> filtrarPor(List<FiltroDeMuestra> filtros){
+	
+		return filtros.stream().reduce(this.listaDeMuestras , (muestras, filtro) -> filtro.filtrar(muestras),(muestras, muestras2) -> muestras2);
+	}
+	
+	
+	
 }
