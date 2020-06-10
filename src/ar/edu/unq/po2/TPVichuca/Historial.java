@@ -26,6 +26,14 @@ public class Historial {
 		this.listaDeZonas = new ArrayList<ZonaDeCobertura>();
 	}
 	
+	public void setDeMuestras(List<Muestra> muestras) {
+		this.listaDeMuestras.addAll(muestras);
+	}
+	
+	public void cleanMuestras() {
+		this.listaDeMuestras.clear();
+	}
+	
 	public EvaluadorDeConocimiento getEvaluador() {
 		return evaluador;
 	}
@@ -38,7 +46,7 @@ public class Historial {
 	}
 
 	public void agregarMuestra(Muestra muestra) {
-		agregarConocimientoAParticipanteNuevo(muestra.getUser());
+		this.agregarConocimientoAParticipanteNuevo(muestra.getUser());
 		listaDeMuestras.add(muestra);
 		this.notificarZonasPorNuevaMuestra(muestra);
 		
@@ -85,7 +93,7 @@ public class Historial {
 	public ArrayList<Muestra> muestrasDe(Usuario user){
 		ArrayList<Muestra> listaDeMuestrasDe = new ArrayList<Muestra>();
 			for(Muestra muestraActual : this.listaDeMuestras) {
-				if(muestraActual.getUser() == user) {
+				if(user.getIdUser() == muestraActual.getUser().getIdUser()){
 					listaDeMuestrasDe.add(muestraActual);
 				}
 			}
@@ -93,11 +101,11 @@ public class Historial {
 	}
 	
 	public ArrayList<Opinion> opinionesDe(Usuario user){
-		ArrayList<Opinion> listaDeOpinionesDe = new ArrayList<Opinion>();
+		ArrayList<Opinion> listaDeMuestrasDe = new ArrayList<Opinion>();
 			for(Muestra muestraActual : this.listaDeMuestras) {
-				listaDeOpinionesDe.addAll(muestraActual.listaDeOpinionesDe(user));
+				listaDeMuestrasDe.addAll(muestraActual.listaDeOpinionesDe(user));
 			}
-		return listaDeOpinionesDe;
+		return listaDeMuestrasDe;
 	}
 
 	

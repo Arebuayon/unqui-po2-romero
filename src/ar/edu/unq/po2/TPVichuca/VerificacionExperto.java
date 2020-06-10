@@ -4,16 +4,14 @@ import java.util.ArrayList;
 
 public class VerificacionExperto extends Verificacion{
 	
-
-
-	public VerificacionExperto(boolean valorDeVerdad) {
-		super(valorDeVerdad);
+	public VerificacionExperto() {
+		super();
 	}
 
 	public ArrayList<Opinion> OpinionesDeUsuarios(Muestra muestra) {
 		 ArrayList<Opinion> opiniones = new  ArrayList<Opinion>();
 		 	for(Opinion respueta : muestra.getOpiniones()){
-		 		if(respueta.getUser().getConocimiento().getTipoDeConocimiento() == "Experto") {
+		 		if(respueta.getUser().tipoDeConocimiento() == "Experto") {
 		 			opiniones.add(respueta);
 		 		}
 		 	}
@@ -21,8 +19,9 @@ public class VerificacionExperto extends Verificacion{
 	}
 	
 	public Opinion opinionActual(Muestra muestra) {
-		Integer contadorDeRespuestas = 0;
-		Opinion opinionActual = new Opinion(muestra.getUser(),new RespuestaNoDefinida());
+		int contadorDeRespuestas = 1;
+		RespuestaNoDefinida respuesta = new RespuestaNoDefinida();
+		Opinion opinionActual = new Opinion(muestra.getUser(),respuesta);
 			for(Opinion opinion : this.OpinionesDeUsuarios(muestra) ){
 				if(contadorDeRespuestas < muestra.cantidadDeVecesQueApareceLa(opinion)) {
 					contadorDeRespuestas = muestra.cantidadDeVecesQueApareceLa(opinion);
@@ -32,26 +31,27 @@ public class VerificacionExperto extends Verificacion{
 		return opinionActual;
 	}
 
-	public boolean puedeOpinarSobreLa(Muestra muestra) {
-		return  muestra.getVerificado().isVerificado();
+	public boolean puedeOpinarSobreLa(Usuario user , Muestra muestra) {
+		return  !muestra.isMuestraVerificada() && 
+				muestra.cantidadDeVecesApareceEl(user) == 0
+				&& user.tipoDeConocimiento() == "Experto";
 	}
 	
 	public void verificar(Muestra muestra) {
 		 if(this.masDe2votoPorUnaOpinion(muestra)) {
-			 muestra.setVerificado(new VerificacionExperto(true));
-			 muestra.setNivelDeVerificacion("verificada");
+			 muestra.getVerificado().setVerificado(true);
 		 }
 	}
 	
 	public boolean masDe2votoPorUnaOpinion(Muestra muestra) {
 		Opinion opinionActual = this.opinionActual(muestra);
-		Integer contador = 0;
+		int contador = 0;
 			for(Opinion opinion : this.OpinionesDeUsuarios(muestra)) {
-				if(opinionActual == opinion) {
+				if(opinionActual.nombreDelInsecto() == opinion.nombreDelInsecto()) {
 					contador += 1;
 				}
 			}
-		return contador > 2;
+		return contador > 1;
 	}
 
 }

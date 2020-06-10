@@ -8,6 +8,11 @@ import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.TPVichuca.Opinion;
+import ar.edu.unq.po2.TPVichuca.RespuestaImagenPocoClara;
+import ar.edu.unq.po2.TPVichuca.RespuestaNoDefinida;
+import ar.edu.unq.po2.TPVichuca.Usuario;
+
 public class OpinionTest {
 
 	private Usuario user;
@@ -38,7 +43,5 @@ public class OpinionTest {
 		assertEquals("ImagenPocaClara",opinion2.nombreDelInsecto());
 		
 	}
-	
-	
 }
-© 2020 GitHub, Inc.
+	

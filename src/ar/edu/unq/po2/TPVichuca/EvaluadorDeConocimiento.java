@@ -3,16 +3,7 @@ package ar.edu.unq.po2.TPVichuca;
 
 public class EvaluadorDeConocimiento {
 	
-	private Usuario user;
-	
-	public Usuario getUser() {
-		return user;
-	}
-
-	public void setUser(Usuario user) {
-		this.user = user;
-	}
-	
+		
 	public boolean esExperto(Historial historial, Usuario user) { 
 		
 		return historial.muestrasHace30DiasDe(user).size() > 10 

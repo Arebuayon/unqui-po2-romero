@@ -10,6 +10,13 @@ import java.awt.image.BufferedImage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.TPVichuca.IClasificacion;
+import ar.edu.unq.po2.TPVichuca.Muestra;
+import ar.edu.unq.po2.TPVichuca.Opinion;
+import ar.edu.unq.po2.TPVichuca.Ubicacion;
+import ar.edu.unq.po2.TPVichuca.Usuario;
+import ar.edu.unq.po2.TPVichuca.VerificacionBasica;
+
 class MuestraTest {
 
 	private Muestra muestra1;

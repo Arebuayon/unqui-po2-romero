@@ -22,12 +22,13 @@ public class Muestra {
 	
 	
 	public Muestra(Usuario user, BufferedImage fotoDelInsecto, Ubicacion ubicacion,Opinion opinion) {
-		super();
+		
 		this.user = user;
 		this.fotoDelInsecto = fotoDelInsecto;
 		this.ubicacion = ubicacion;
 		this.fechaCreada = LocalDate.now();
 		this.listaDeOpiniones.add(opinion);
+		this.verificado = new VerificacionBasica();
 	}
 
 	public Ubicacion getUbicacion() {
@@ -134,6 +135,26 @@ public class Muestra {
 		 	}
 		 return contador;
 	}
+	
+	public void cambiarVerificacion() {
+		this.getVerificado().cambiarTipoDeVerificacion(this);
+	}
+	
+	public boolean isMuestraVerificada() {
+		return this.getVerificado().isVerificado();
+	}
+	
+	public void opinarSobreLaMuestra(Opinion opinion) {
+		if(this.getVerificado().puedeOpinarSobreLa(opinion.getUser(), this)) {
+			this.getOpiniones().add(opinion);
+			this.cambiarVerificacion();
+		}
+	}
+	
+	public void verificarMuestra() {
+		this.getVerificado().verificar(this);
+	}
+
 	
 	public LocalDate getFechaDeUltimaVotacion() {
 		LocalDate maxDate = this.fechasDeOpiniones().stream()
