@@ -1,12 +1,15 @@
 package ar.edu.unq.po2.TPVichuca;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Ubicacion {
 
 	private double latitud;
 	private double longitud;
 	
 	public Ubicacion(float latitud, float longitud) {
-		super();
+		
 		this.latitud = latitud;
 		this.longitud = longitud;
 	}
@@ -15,17 +18,11 @@ public class Ubicacion {
 		return latitud;
 	}
 
-	public void setLatitud(float latitud) {
-		this.latitud = latitud;
-	}
-
+	
 	public double getLongitud() {
 		return longitud;
 	}
 
-	public void setLongitud(float longitud) {
-		this.longitud = longitud;
-	}
 	
 	public static double distanciaCoord(double lat1, double lng1, double lat2, double lng2) {  
         double radioTierra = 6371; 
@@ -44,6 +41,12 @@ public class Ubicacion {
 	public double distanciaAOtraUbicacion(Ubicacion ubicacion2) {         
         double distanciaEntre2Ubicaciones = distanciaCoord(this.getLatitud(),this.getLongitud(),ubicacion2.getLatitud(),ubicacion2.getLongitud());
         return distanciaEntre2Ubicaciones;
-    }  
+    } 
+	
+	public List<Ubicacion> ubicacionesAMenosDeXKm(List<Ubicacion> ubicaciones  , double distanciaEnKm){
+		return ubicaciones.stream().filter(ubicacion -> this.distanciaAOtraUbicacion(ubicacion) < distanciaEnKm).collect(Collectors.toList());
+		
+		
+	}
 	
 }

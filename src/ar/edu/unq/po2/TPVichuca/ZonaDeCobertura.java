@@ -1,6 +1,8 @@
 package ar.edu.unq.po2.TPVichuca;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 	public class ZonaDeCobertura {
 		private String nombre;
@@ -12,7 +14,7 @@ import java.util.ArrayList;
 		this.nombre = nombre;
 		this.epicentro = ubicacion;
 		this.radio = radio;
-		this.organizacionesSuscribidas = new ArrayList<Organizacion>;
+		this.organizacionesSuscribidas = new ArrayList<Organizacion>();
 		
 	}
 		
@@ -22,18 +24,19 @@ import java.util.ArrayList;
 	}
 
 	public Ubicacion getEpicentro(){
-		return epicentro;
+		return this.epicentro;
 	}
 
 	public Integer getRadio() {
 		return radio;
 	}
 
-	private boolean esZonaSolapada(ZonaDeCobertura otraZonaDeCobertura) {
+	public boolean esZonaSolapada(ZonaDeCobertura otraZonaDeCobertura) {
 		Ubicacion ubicacion1 = this.getEpicentro();
 		Ubicacion ubicacion2 = otraZonaDeCobertura.getEpicentro();
 	
 		return(sumarRadios(this , otraZonaDeCobertura ) > (ubicacion1.distanciaAOtraUbicacion(ubicacion2)));		
+		
 	}
 
 
@@ -42,16 +45,8 @@ import java.util.ArrayList;
 	}
 
 
-	public ArrayList<ZonaDeCobertura> zonasSolapadas(ArrayList<ZonaDeCobertura> zonas){
-		ArrayList<ZonaDeCobertura> zonasSolapadas = new ArrayList<ZonaDeCobertura>();
-		for (ZonaDeCobertura zona : zonas) {
-			if (this.esZonaSolapada(zona)){
-				zonasSolapadas.add(zona);
-			}
-		}	
-		
-		return zonasSolapadas;
-	
+	public List<ZonaDeCobertura> zonasSolapadas(ArrayList<ZonaDeCobertura> zonas){
+		return zonas.stream().filter(zona -> zona.esZonaSolapada(this)).collect(Collectors.toList());
 	}
 
 	public void suscribirOrganizacion(Organizacion organizacion) {

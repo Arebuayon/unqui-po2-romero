@@ -11,21 +11,30 @@ public  class Organizacion {
 	
 	
 	public Organizacion(Ubicacion ubicacion, Integer cantidadePersonas, TipoDeOrganizacion tipoDeOrganizacion) {
-		super();
+		
 		this.tipoDeOrganizacion = tipoDeOrganizacion;
 		this.ubicacion = ubicacion;
 		this.cantidadePersonas = cantidadePersonas;
 	
 	}
-
+	
+	public void setFuncionalidadExternaParaValidacion(IFuncionalidadExterna funcionalidad) {
+		
+		this.funcionalidadExternaParaValidacion = funcionalidad;
+	}
+	
+	public void setFuncionalidadExternaParaNuevaMuestra(IFuncionalidadExterna funcionalidad) {
+		
+		this.funcionalidadExternaParaNuevaMuestra = funcionalidad;
+	}
+	
 	public Ubicacion getUbicacion() {
 		return ubicacion;
 	}
-	
-	public void setUbicacion(Ubicacion ubicacion) {
-		this.ubicacion = ubicacion;
+			
+	public TipoDeOrganizacion getTipoDeOrganizacion(){
+		return this.tipoDeOrganizacion;
 	}
-
 	public Integer getCantidadePersonas() {
 		return cantidadePersonas;
 	}
