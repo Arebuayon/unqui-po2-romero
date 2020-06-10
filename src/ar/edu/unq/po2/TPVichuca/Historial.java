@@ -102,6 +102,7 @@ public class Historial {
 		return listaDeMuestrasDe;
 	}
 
+
 	
 		
 	public List<Opinion> opinionesHace30DiasDe(Usuario user) {		

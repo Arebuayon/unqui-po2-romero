@@ -84,18 +84,7 @@ public class Muestra {
 		return this.getVerificado().opinionActual(this);
 	}
 	
-/*	public Opinion opinionActual() {
-		Integer contadorDeRespuestas = 0;
-		Opinion opinionActual = null;
-			for(Opinion opinion : this.getOpiniones() ){
-				if(contadorDeRespuestas < this.cantidadDeVecesQueApareceLa(opinion)) {
-					contadorDeRespuestas = this.cantidadDeVecesQueApareceLa(opinion);
-					opinionActual = opinion;
-				}
-			}
-	return opinionActual;
-	}
-*/	
+
 	public Integer cantidadDeVecesQueApareceLa(Opinion opinion) {
 		Integer contador = 0;
 			for(Opinion opinionActual : listaDeOpiniones) {
@@ -124,6 +113,16 @@ public class Muestra {
 		 		}
 		 	}
 		 return OpinionesDe ;
+	}
+	
+	public Opinion OpinionDe(Usuario user){
+		Opinion respuestaActual = null;
+		 	for(Opinion respuesta : this.getOpiniones()){
+		 		if(respuesta.getUser().getIdUser() == user.getIdUser()) {
+					respuestaActual = respuesta;
+	 				}
+		 	}
+		 return respuestaActual;
 	}
 		
 	public Integer cantidadDeExpertosQueOpinaron(){

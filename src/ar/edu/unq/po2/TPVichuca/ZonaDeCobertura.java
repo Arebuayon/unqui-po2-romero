@@ -30,7 +30,10 @@ import java.util.stream.Collectors;
 	public Integer getRadio() {
 		return radio;
 	}
-
+	public ArrayList<Organizacion> getOrganizacionesSuscribidas(){
+		return this.organizacionesSuscribidas;
+		
+	}
 	public boolean esZonaSolapada(ZonaDeCobertura otraZonaDeCobertura) {
 		Ubicacion ubicacion1 = this.getEpicentro();
 		Ubicacion ubicacion2 = otraZonaDeCobertura.getEpicentro();
