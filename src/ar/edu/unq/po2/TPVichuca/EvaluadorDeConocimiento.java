@@ -6,8 +6,8 @@ public class EvaluadorDeConocimiento {
 		
 	public boolean esExperto(Historial historial, Usuario user) { 
 		
-		return historial.muestrasHace30DiasDe(user).size() > 10 
-				&& historial.opinionesHace30DiasDe(user).size() >20;
+		return historial.cantidadDeMuestrasHace30DiasDe(user) > 10 
+				&& historial.cantidadDeOpinionesHace30DiasDe(user) >20;
 	}	
 	
 	public void reClasificarUsuario(Usuario user , Historial historial){ 

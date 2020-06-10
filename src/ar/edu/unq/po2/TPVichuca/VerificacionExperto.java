@@ -40,6 +40,8 @@ public class VerificacionExperto extends Verificacion{
 	public void verificar(Muestra muestra) {
 		 if(this.masDe2votoPorUnaOpinion(muestra)) {
 			 muestra.getVerificado().setVerificado(true);
+			 muestra.setNivelDeVerificacion("verificada");
+			 ConfiguracionHistorial.getConfiguracion().getHistorial().notificarZonasPorNuevaValidacion(muestra);
 		 }
 	}
 	

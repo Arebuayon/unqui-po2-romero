@@ -40,6 +40,7 @@ public class VerificacionBasica extends Verificacion{
 	@Override
 	public void verificar(Muestra muestra) {
 		muestra.getVerificado().setVerificado(false);
+		muestra.setNivelDeVerificacion("votada");
 		
 	}
 

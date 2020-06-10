@@ -76,7 +76,7 @@ public class Muestra {
 
 	public void setVerificado(Verificacion verificado) {
 		this.verificado = verificado;
-		Historial.getHistorial().notificarZonasPorNuevaValidacion(this);
+		
 	}
 	
 		

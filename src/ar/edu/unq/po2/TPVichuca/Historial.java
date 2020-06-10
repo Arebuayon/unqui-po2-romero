@@ -12,15 +12,8 @@ public class Historial {
 	private List<Muestra> listaDeMuestras;
 	private EvaluadorDeConocimiento evaluador;
 	private ArrayList<ZonaDeCobertura> listaDeZonas;
-	private static  Historial miHistorial;
-
-	public static Historial getHistorial() {
-		if (miHistorial==null) {
-			miHistorial = new Historial();
-		}
-		return miHistorial;
-	}	
-	private Historial() {	
+	
+	public Historial() {	
 		this.listaDeMuestras = new ArrayList<Muestra>();
 		this.evaluador = new EvaluadorDeConocimiento();
 		this.listaDeZonas = new ArrayList<ZonaDeCobertura>();
@@ -29,6 +22,7 @@ public class Historial {
 	public void setDeMuestras(List<Muestra> muestras) {
 		this.listaDeMuestras.addAll(muestras);
 	}
+	
 	
 	public void cleanMuestras() {
 		this.listaDeMuestras.clear();
@@ -136,6 +130,13 @@ public class Historial {
 				.collect(Collectors.toList());
 		
 	}
+	public Integer cantidadDeMuestrasHace30DiasDe(Usuario user) {
+		return muestrasHace30DiasDe(user).size();
+	}
+	
+	public Integer cantidadDeOpinionesHace30DiasDe(Usuario user) {
+		return opinionesHace30DiasDe(user).size();
+	}
 	
 	public List<Muestra> filtrarPor(List<FiltroDeMuestra> filtros){
 	
@@ -146,5 +147,9 @@ public class Historial {
 		return listaDeMuestras.stream().filter(m -> m.getUbicacion().distanciaAOtraUbicacion(muestra.getUbicacion()) < distancia).collect(Collectors.toList());
 		
 	}
+
+	
+
+	
 	
 }
