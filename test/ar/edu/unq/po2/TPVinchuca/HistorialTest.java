@@ -100,6 +100,9 @@ public class HistorialTest {
 	public void testSePuedenPedirLasMuestrasAMenosDeXKmDeMuestra() {
 		ArrayList<Muestra> listaDeRespuesta = new ArrayList<Muestra>();
 		listaDeRespuesta.add(muestra3);
+		muestra1.setUbicacion(ubicacion1);
+		muestra2.setUbicacion(ubicacion2);
+		muestra3.setUbicacion(ubicacion3);
 		historial1.getListaDeMuestras().add(muestra1);
 		historial1.getListaDeMuestras().add(muestra2);
 		historial1.getListaDeMuestras().add(muestra3);

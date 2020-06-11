@@ -1,6 +1,6 @@
 package ar.edu.unq.po2.TPVichuca;
 
-public class Conocimiento implements IConocimiento {
+public abstract class Conocimiento  {
 	
 	private String tipoDeConocimiento;
 	
@@ -21,8 +21,9 @@ public class Conocimiento implements IConocimiento {
 		return muestra.getUser().getIdUser() != user.getIdUser();
 	}	
 
-	@Override
-	public void valorarMuestra(Usuario user,Muestra muestra,Opinion opinion){}
+	
+	public abstract void valorarMuestra(Usuario user,Muestra muestra,Opinion opinion); 
+	
 	
 }
 

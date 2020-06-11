@@ -4,7 +4,7 @@ public class Usuario {
 	
 	private int idUser;
 	private Ubicacion ubicacion;
-	private IConocimiento conocimiento;
+	private Conocimiento conocimiento;
 	
 	public Usuario(int idUser, Ubicacion ubicacion) {
 		
@@ -22,7 +22,7 @@ public class Usuario {
 
 
 
-	public IConocimiento getConocimiento() {
+	public Conocimiento getConocimiento() {
 		return conocimiento;
 	}
 	
@@ -30,7 +30,7 @@ public class Usuario {
 		return conocimiento.getTipoDeConocimiento();
 	}
 
-	public void setConocimiento(IConocimiento conocimiento) {
+	public void setConocimiento(Conocimiento conocimiento) {
 		this.conocimiento = conocimiento;
 	}
 	

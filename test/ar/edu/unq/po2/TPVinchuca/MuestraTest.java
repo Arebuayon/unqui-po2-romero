@@ -74,14 +74,14 @@ class MuestraTest {
 		when(otraOpinion1.getRespuesta()).thenReturn(respuesta1);
 		when(otraOpinion2.getRespuesta()).thenReturn(respuesta2);
 		
-		when(otraOpinion1.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("");
+		//when(otraOpinion1.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("");
 		
 		muestra1.getOpiniones().add(otraOpinion1);
 		
 		
 		assertEquals(muestra1.cantidadDeExpertosQueOpinaron(),0); // 0/2
 
-		when(otraOpinion1.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Experto");
+		//when(otraOpinion1.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Experto");
 		muestra1.getOpiniones().add(otraOpinion2);
 		
 		assertEquals(muestra1.cantidadDeExpertosQueOpinaron(),1); // 1/3

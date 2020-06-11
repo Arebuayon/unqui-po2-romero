@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.*;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,6 +44,15 @@ public class OpinionTest {
 		assertEquals("No definido",opinion1.nombreDelInsecto());
 		assertEquals("ImagenPocaClara",opinion2.nombreDelInsecto());
 		
+	}
+	
+	@Test
+	public void seLePuedePedirLaFechaEnviadaALaOpinion() {
+		assertEquals(LocalDate.now() , opinion1.getFechaEnviada());
+	}
+	@Test
+	public void seLePuedePedirElUserALaOpinion() {
+		assertEquals(user2 , opinion2.getUser());
 	}
 }
 	

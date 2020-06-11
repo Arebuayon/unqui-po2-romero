@@ -6,14 +6,15 @@ import java.util.Calendar;
 public class Opinion {
 
 	private Usuario user;
-	private LocalDate fechaEnviada = LocalDate.now();
+	private LocalDate fechaEnviada;
 	private IClasificacion respuesta;
-	private String hechoPorUn;
+	//private String hechoPorUn;
 
 	public Opinion(Usuario user, IClasificacion respuesta) {
 		this.user = user;
 		this.setRespuesta(respuesta);
-//		this.settipoDeConocimientoAlaHoraDeOpinar(user.getConocimiento().getTipoDeConocimiento());
+		this.fechaEnviada = LocalDate.now();
+		//this.settipoDeConocimientoAlaHoraDeOpinar(user.getConocimiento().getTipoDeConocimiento());
 	}
 	
 	public LocalDate getFechaEnviada() {
@@ -25,9 +26,6 @@ public class Opinion {
 		return user;
 	}
 
-	public void setUser(Usuario user) {
-		this.user = user;
-	}
 	
 	public IClasificacion getRespuesta() {
 		return respuesta;
@@ -37,12 +35,12 @@ public class Opinion {
 		this.respuesta = respuesta;
 	}
 	
-	public String tipoDeConocimientoAlaHoraDeOpinar() {
+	/*public String tipoDeConocimientoAlaHoraDeOpinar() {
 		return hechoPorUn;
 	}
-	public void settipoDeConocimientoAlaHoraDeOpinar(String tipoDeConocimiento) {
+	 public void settipoDeConocimientoAlaHoraDeOpinar(String tipoDeConocimiento) {
 		this.hechoPorUn = tipoDeConocimiento;
-	}
+	}*/
 	
 	public String nombreDelInsecto(){ 
 		return this.getRespuesta().nombreDelInsectoORespuesta();

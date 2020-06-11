@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import ar.edu.unq.po2.TPVichuca.Conocimiento;
 import ar.edu.unq.po2.TPVichuca.EvaluadorDeConocimiento;
 import ar.edu.unq.po2.TPVichuca.Historial;
 import ar.edu.unq.po2.TPVichuca.IConocimiento;
@@ -17,7 +18,7 @@ class UsuarioTest {
 	Usuario usuario1;
 	Muestra muestra1;
 	Historial historial1;
-	IConocimiento conocimiento1;
+	Conocimiento conocimiento1;
 	Ubicacion ubicacion1;
 	Opinion opinion1;
 	EvaluadorDeConocimiento evaluador1;
@@ -26,7 +27,7 @@ class UsuarioTest {
 	void setUp() throws Exception {
 		
 		ubicacion1 = mock(Ubicacion.class);
-		conocimiento1 = mock(IConocimiento.class);
+		conocimiento1 = mock(Conocimiento.class);
 		muestra1 = mock(Muestra.class);
 		historial1 = mock (Historial.class);
 		opinion1 = mock(Opinion.class);

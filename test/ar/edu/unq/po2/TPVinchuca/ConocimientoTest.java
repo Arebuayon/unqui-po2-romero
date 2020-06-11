@@ -26,8 +26,8 @@ public class ConocimientoTest {
 	private Opinion opinion1;
 	private Opinion opinion2;
 	private VerificacionExperto verificacionExperto;
-	
-	
+	private VerificacionBasica verificacionBasica;
+	private VerificacionBasica verificacionBasicaMock;
 	
 	@BeforeEach
 	public void setUp() {
@@ -41,33 +41,19 @@ public class ConocimientoTest {
 		concExperto = new ConocimientoExperto();
 		concEspecialista = new ConocimientoEspecialista();
 		verificacionExperto = new VerificacionExperto();
+		verificacionBasica = new VerificacionBasica();
 	}
 	
-/*	@Test
-	public void muestraNoValoradas(){
+	@Test
+	public void seLePuedePedirElTipoDeConocimientoAlConocimiento() {
+		concBasico.setTipoDeConocimiento("Basico");
 		
-		
-		when(user.getIdUser()).thenReturn(111);
-		when(user2.getIdUser()).thenReturn(222);
-		when(user.tipoDeConocimiento()).thenReturn("Basico");
-		when(user2.tipoDeConocimiento()).thenReturn("Basico");
-		when(opinion1.getUser()).thenReturn(user);
-		when(opinion1.getUser()).thenReturn(user2);
-		
-		muestra1 = new Muestra(user, null, null, opinion1);
-		
-		assertTrue(concBasico.muestraNoValoradaPor(user, muestra1));
-		assertFalse(concBasico.muestraNoValoradaPor(user2, muestra1));
-		
-		assertTrue(concExperto.muestraNoValoradaPor(user, muestra1));
-		assertFalse(concExperto.muestraNoValoradaPor(user2, muestra1));
-		
-		assertTrue(concEspecialista.muestraNoValoradaPor(user, muestra1));
-		assertFalse(concEspecialista.muestraNoValoradaPor(user2, muestra1));
-		
-		
+		assertEquals("Basico", concBasico.getTipoDeConocimiento());
 	}
-*/	
+	
+	
+	
+	
 	@Test
 	public void muestrasAptasParaValorar(){
 		
@@ -87,14 +73,7 @@ public class ConocimientoTest {
 		
 	}
 	
-	@Test
-	public void tipoDeVerificacionVerificados() {
-/*		
-		assertFalse(concBasico.getTipoDeVerificacion().isVerificado());
-		assertFalse(concExperto.getTipoDeVerificacion().isVerificado());
-		assertFalse(concEspecialista.getTipoDeVerificacion().isVerificado());
-*/				
-	}
+	
 	
 	@Test
 	public void valoracionDeMuestraBasica() {
@@ -151,5 +130,20 @@ public class ConocimientoTest {
 		
 	}
 	
+	@Test
+	public void testConocimientoBasicoValoraMuestra() {
+		verificacionBasicaMock = mock(VerificacionBasica.class);
+		when(user.getIdUser()).thenReturn(111);
+		when(user2.getIdUser()).thenReturn(123);
+		when(muestra1.getUser()).thenReturn(user2);
+		when(muestra1.getVerificado()).thenReturn(verificacionBasicaMock);
+		when(verificacionBasicaMock.puedeOpinarSobreLa(user, muestra1)).thenReturn(true);
+		concBasico.muestraActaParaValorar(user, muestra1);
+		concBasico.valorarMuestra(user, muestra1, opinion1);
+		
+		
+		verify(muestra1).getOpiniones();
+		
+	}
 	
 }
