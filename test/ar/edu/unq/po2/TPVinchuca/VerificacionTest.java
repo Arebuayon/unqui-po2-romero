@@ -24,7 +24,8 @@ class VerificacionTest {
 	private Muestra muestra3;
 	private VerificacionBasica verBasica;
 	private VerificacionExperto verExperto;
-	
+	private Muestra muestraMock;
+	private Usuario usuarioMock;
 	@BeforeEach
 	public void setUp() {
 		
@@ -175,7 +176,7 @@ class VerificacionTest {
 		
 	}
 	
-	@Test
+	/*@Test
 	void testPuedeOpinarSobreLaMuestraBasico() {
 		
 		when(user1.getIdUser()).thenReturn(111);
@@ -194,6 +195,26 @@ class VerificacionTest {
 		assertFalse(verBasica.puedeOpinarSobreLa(user3, muestra1));
 		
 	}
+	*/
+	@Test
+	void testPuedeOpinarSobreLaMuestraBasicoV2() {
+		
+		muestraMock = mock(Muestra.class);
+		usuarioMock = mock(Usuario.class);
+		when(muestraMock.cantidadDeExpertosQueOpinaron()).thenReturn(1);
+		when(muestraMock.isMuestraVerificada()).thenReturn(false);
+		when(muestraMock.cantidadDeVecesApareceEl(user2)).thenReturn(0);
+		when(muestraMock.cantidadDeVecesApareceEl(user1)).thenReturn(6);
+		when(muestraMock.cantidadDeVecesApareceEl(user3)).thenReturn(3);
+		
+		assertTrue(verBasica.puedeOpinarSobreLa(user2, muestraMock));
+		
+		assertFalse(verBasica.puedeOpinarSobreLa(user1, muestraMock));
+		assertFalse(verBasica.puedeOpinarSobreLa(user3, muestraMock));
+		
+	}
+	
+	
 	
 	@Test
 	void testPuedeOpinarSobreLaMuestraExperto() {

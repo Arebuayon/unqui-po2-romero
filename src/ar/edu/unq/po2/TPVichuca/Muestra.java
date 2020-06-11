@@ -154,6 +154,7 @@ public class Muestra {
 		this.getVerificado().verificar(this);
 	}
 
+		
 	
 	public LocalDate getFechaDeUltimaVotacion() {
 		LocalDate maxDate = this.fechasDeOpiniones().stream()

@@ -21,6 +21,7 @@ class MuestraTest {
 
 	private Muestra muestra1;
 	private Usuario user;
+	private Usuario user2;
 	private Ubicacion lugar;
 	private Opinion opinionUser;
 	private BufferedImage foto;
@@ -34,6 +35,7 @@ class MuestraTest {
 	public void setUp() {
 		
 		user = mock(Usuario.class);
+		user2 = mock(Usuario.class);
 		lugar = mock(Ubicacion.class);
 		opinionUser = mock(Opinion.class);
 		foto = mock(BufferedImage.class);
@@ -67,7 +69,7 @@ class MuestraTest {
 			
 		assertEquals(muestra1.cantidadDeVecesQueApareceLa(opinionUser),1);
 		assertEquals(muestra1.cantidadDeVecesApareceEl(user),1);
-		assertFalse(muestra1.listaDeOpinionesDe(user).isEmpty());
+	//	assertFalse(muestra1.listaDeOpinionesDe(user).isEmpty());
 		
 		when(otraOpinion1.getRespuesta()).thenReturn(respuesta1);
 		when(otraOpinion2.getRespuesta()).thenReturn(respuesta2);
@@ -85,5 +87,35 @@ class MuestraTest {
 		assertEquals(muestra1.cantidadDeExpertosQueOpinaron(),1); // 1/3
 		
 	}
+		
+		@Test
+		public void testCantidadDevecesQueApareceElUser() {
+			
+			when(user.getIdUser()).thenReturn(111);
+			when(user2.getIdUser()).thenReturn(222);
+			when(opinionUser.getUser()).thenReturn(user);
+			
+			muestra1 = new Muestra(user, foto, lugar , opinionUser);
+			
+			assertEquals(1 , muestra1.cantidadDeVecesApareceEl(user));
+			assertEquals(0 , muestra1.cantidadDeVecesApareceEl(user2));
+				
+		}
+		
+		@Test
+		public void testOpinionDeUser() {
+			
+			when(user.getIdUser()).thenReturn(111);
+			when(user2.getIdUser()).thenReturn(222);
+			when(otraOpinion1.getUser()).thenReturn(user2);
+			when(otraOpinion1.nombreDelInsecto()).thenReturn("Vichuca");
+			
+			muestra1 = new Muestra(user2, foto, lugar , otraOpinion1);
+			
+			assertEquals(otraOpinion1,muestra1.OpinionDe(user2));
+			assertEquals(null,muestra1.OpinionDe(user));
+			
+		}
+		
 
 }

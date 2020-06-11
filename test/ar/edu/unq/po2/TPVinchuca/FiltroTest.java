@@ -14,7 +14,9 @@ import ar.edu.unq.po2.TPVichuca.FiltroPorFechaDeCreacionMenorA;
 import ar.edu.unq.po2.TPVichuca.FiltroPorFechaDeUltimaVotacionMayorA;
 import ar.edu.unq.po2.TPVichuca.FiltroPorFechaDeUltimaVotacionMenorA;
 import ar.edu.unq.po2.TPVichuca.FiltroPorNivelDeVerificacion;
+import ar.edu.unq.po2.TPVichuca.FiltroPorTipoDeInsecto;
 import ar.edu.unq.po2.TPVichuca.Muestra;
+import ar.edu.unq.po2.TPVichuca.Opinion;
 
 
 
@@ -24,10 +26,15 @@ class FiltroTest {
 	FiltroPorFechaDeUltimaVotacionMenorA filtroFechaVotacionMenorA1;
 	FiltroPorFechaDeUltimaVotacionMayorA filtroFechaVotacionMayorA1;
 	FiltroPorNivelDeVerificacion filtroPorNivelDeVerificacion1;
+	FiltroPorTipoDeInsecto filtroPorTipoDeInsecto1;
 	ArrayList<Muestra>muestras=new ArrayList<Muestra>();
 	Muestra muestra1;
 	Muestra muestra2;
 	Muestra muestra3;
+	Opinion opinion1;
+	Opinion opinion2;
+	Opinion opinion3;
+	
 	
 	@BeforeEach
 	void setUp() throws Exception {
@@ -54,6 +61,28 @@ class FiltroTest {
 		filtroPorNivelDeVerificacion1 = new FiltroPorNivelDeVerificacion("verificada");
 		
 		assertEquals(listaDeRespuesta, filtroPorNivelDeVerificacion1.filtrar(muestras));
+	}
+	
+	@Test
+	void testSePuedeFiltrarPorTipoDeInsecto() {
+		opinion1=mock(Opinion.class);
+		opinion2=mock(Opinion.class);
+		opinion3=mock(Opinion.class);
+		when(opinion1.nombreDelInsecto()).thenReturn("vinchuca");
+		when(opinion2.nombreDelInsecto()).thenReturn("chinche");
+		when(opinion3.nombreDelInsecto()).thenReturn("vinchuca");
+		when(muestra1.opinionActual()).thenReturn(opinion1);
+		when(muestra2.opinionActual()).thenReturn(opinion2);
+		when(muestra3.opinionActual()).thenReturn(opinion3);
+		
+		
+		
+		ArrayList<Muestra> listaDeRespuesta = new ArrayList<Muestra>();
+		listaDeRespuesta.add(muestra1);
+		listaDeRespuesta.add(muestra3);
+		filtroPorTipoDeInsecto1 = new FiltroPorTipoDeInsecto("vinchuca");
+		
+		assertEquals(listaDeRespuesta,  filtroPorTipoDeInsecto1.filtrar(muestras));
 	}
 	
 	@Test
@@ -117,5 +146,6 @@ class FiltroTest {
 		
 		assertEquals(listaDeRespuesta,  filtroFechaVotacionMenorA1.filtrar(muestras));
 	}
+
 
 }
