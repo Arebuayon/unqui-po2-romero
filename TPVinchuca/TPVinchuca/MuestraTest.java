@@ -56,6 +56,13 @@ class MuestraTest {
 		assertEquals("Chince Foliada",opinionUser.getRespuesta().nombreDelInsectoORespuesta());	
 	}
 	@Test
+	public void testSeLePuedenPedirLaUbicacionYLaFotoALaMuestra() {
+		
+		assertEquals(foto, muestra1.getFotoDelInsecto());
+		assertEquals(lugar, muestra1.getUbicacion());
+	}
+	
+	@Test
 	public void testCantidadDeOpinionesExpertos() {
 		
 		when(opinionUser.getUser()).thenReturn(user);

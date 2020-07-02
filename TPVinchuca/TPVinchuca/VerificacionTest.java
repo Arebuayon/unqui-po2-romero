@@ -6,321 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-/*
-class VerificacionTest {
-	
-	private Usuario user1;
-	private Usuario user2;
-	private Usuario user3;
-	private Opinion opinion1;
-	private Opinion opinion2;
-	private Opinion opinion3;
-	private Muestra muestra1;
-	private Muestra muestra2;
-	private Muestra muestra3;
-	private VerificacionBasica verBasica;
-	private VerificacionExperto verExperto;
-	private Muestra muestraMock;
-	private Usuario usuarioMock;
-	@BeforeEach
-	public void setUp() {
-		
-		user1 = mock(Usuario.class);
-		user2 = mock(Usuario.class);
-		user3 = mock(Usuario.class);
-		opinion1 = mock(Opinion.class);
-		opinion2 = mock(Opinion.class);
-		opinion3 = mock(Opinion.class);
-		muestra1 = new Muestra(null, null, null, null);
-		muestra2 = new Muestra(null, null, null, null);
-		muestra3 = new Muestra(null, null, null, null);
-		verBasica = new VerificacionBasica();
-		verExperto = new VerificacionExperto();
-		
-	}
-	
-	@Test
-	void testVerificacion() {
-		
-		assertFalse(muestra1.isMuestraVerificada());
-		assertFalse(muestra2.isMuestraVerificada());
-		assertFalse(muestra3.isMuestraVerificada());
-		
-	}
-	
-	@Test
-	void testOpinionesDeUsuariosBasicos() {
-		
-		when(user1.tipoDeConocimiento()).thenReturn("Basico");
-		when(user2.tipoDeConocimiento()).thenReturn("Experto");
-		when(user3.tipoDeConocimiento()).thenReturn("Basico");
-		
-		when(opinion1.getUser()).thenReturn(user1);
-		when(opinion2.getUser()).thenReturn(user2);
-		when(opinion3.getUser()).thenReturn(user3);
-		
-		muestra1 = new Muestra(null, null, null, opinion1);
-		muestra1.getOpiniones().add(opinion2);
-		muestra1.getOpiniones().add(opinion3);
-		
-		assertEquals(2,verBasica.OpinionesDeUsuarios(muestra1).size());
-		
-	}
-	
-	@Test
-	void testOpinionesDeUsuariosExpertos() {
-		
-		when(user1.tipoDeConocimiento()).thenReturn("Basico");
-		when(user2.tipoDeConocimiento()).thenReturn("Experto");
-		when(user3.tipoDeConocimiento()).thenReturn("Basico");
-		
-		when(opinion1.getUser()).thenReturn(user1);
-		when(opinion2.getUser()).thenReturn(user2);
-		when(opinion3.getUser()).thenReturn(user3);
-		
-		muestra1 = new Muestra(null, null, null, opinion1);
-		muestra1.getOpiniones().add(opinion2);
-		muestra1.getOpiniones().add(opinion3);
-		
-		assertEquals(1,verExperto.OpinionesDeUsuarios(muestra1).size());
-		
-	}
-	
-	@Test
-	void testOpinionActualEnBasico() {
-		
-		when(user1.tipoDeConocimiento()).thenReturn("Basico");
-		when(user2.tipoDeConocimiento()).thenReturn("Experto");
-		when(user3.tipoDeConocimiento()).thenReturn("Basico");
-		when(opinion1.getUser()).thenReturn(user1);
-		when(opinion2.getUser()).thenReturn(user2);
-		when(opinion3.getUser()).thenReturn(user3);
-		when(opinion1.nombreDelInsecto()).thenReturn("Vichuca");
-		when(opinion2.nombreDelInsecto()).thenReturn("NoVichuca");
-		when(opinion3.nombreDelInsecto()).thenReturn("Vichuca");
-		
-		muestra1 = new Muestra(user1, null, null, opinion1);
-		verBasica = new VerificacionBasica();
-		muestra1.getOpiniones().add(opinion2);
-		muestra1.getOpiniones().add(opinion3);
-		
-		assertEquals(3,muestra1.getOpiniones().size());
-		assertEquals("Vichuca",verBasica.opinionActual(muestra1).nombreDelInsecto());
-		
-	}
-	
-	@Test
-	void testOpinionActualEnExperto() {
-		
-		when(user1.tipoDeConocimiento()).thenReturn("Basico");
-		when(user2.tipoDeConocimiento()).thenReturn("Experto");
-		when(user3.tipoDeConocimiento()).thenReturn("Basico");
-		when(opinion1.getUser()).thenReturn(user1);
-		when(opinion2.getUser()).thenReturn(user2);
-		when(opinion3.getUser()).thenReturn(user3);
-		when(opinion1.nombreDelInsecto()).thenReturn("Vichuca");
-		when(opinion2.nombreDelInsecto()).thenReturn("NoVichuca");
-		when(opinion3.nombreDelInsecto()).thenReturn("NoVichuca");
-		muestra1 = new Muestra(null, null, null, opinion1);
-		muestra1.getOpiniones().add(opinion2);
-		muestra1.getOpiniones().add(opinion3);
-		
-		assertEquals("NoVichuca",verBasica.opinionActual(muestra1).nombreDelInsecto());
-		
-	}
-	
-	@Test
-	void testOpinionActualEnBasicoSinDecicion() {
-		
-		when(user1.tipoDeConocimiento()).thenReturn("Basico");
-		when(user2.tipoDeConocimiento()).thenReturn("Experto");
-		when(user3.tipoDeConocimiento()).thenReturn("Basico");
-		when(opinion1.getUser()).thenReturn(user1);
-		when(opinion2.getUser()).thenReturn(user2);
-		when(opinion3.getUser()).thenReturn(user3);
-		when(opinion1.nombreDelInsecto()).thenReturn("Vichuca");
-		when(opinion2.nombreDelInsecto()).thenReturn("NoVichuca");
-		when(opinion3.nombreDelInsecto()).thenReturn("QueEsUnaVichuca");
-		muestra1 = new Muestra(null, null, null, opinion1);
-		muestra1.getOpiniones().add(opinion2);
-		muestra1.getOpiniones().add(opinion3);
-		
-		assertEquals("No definido",verBasica.opinionActual(muestra1).nombreDelInsecto());
-		
-	}
-	
-	@Test
-	void testOpinionActualEnExpertoSinDecicion() {
-		
-		when(user1.tipoDeConocimiento()).thenReturn("Basico");
-		when(user2.tipoDeConocimiento()).thenReturn("Experto");
-		when(user3.tipoDeConocimiento()).thenReturn("Basico");
-		when(opinion1.getUser()).thenReturn(user1);
-		when(opinion2.getUser()).thenReturn(user2);
-		when(opinion3.getUser()).thenReturn(user3);
-		when(opinion1.nombreDelInsecto()).thenReturn("Vichuca");
-		when(opinion2.nombreDelInsecto()).thenReturn("NoVichuca");
-		when(opinion3.nombreDelInsecto()).thenReturn("QueEsUnaVichuca");
-		muestra1 = new Muestra(null, null, null, opinion1);
-		muestra1.getOpiniones().add(opinion2);
-		muestra1.getOpiniones().add(opinion3);
-		
-		assertEquals("No definido",verExperto.opinionActual(muestra1).nombreDelInsecto());
-		
-	}
-	
-	@Test
-	void testPuedeOpinarSobreLaMuestraBasico() {
-		
-		when(user1.getIdUser()).thenReturn(111);
-		when(user2.getIdUser()).thenReturn(222);
-		when(user3.getIdUser()).thenReturn(333);
-		when(opinion1.getUser()).thenReturn(user1);
-		when(opinion2.getUser()).thenReturn(user2);
-		when(opinion3.getUser()).thenReturn(user3);
-		
-		muestra1 = new Muestra(user1, null, null, opinion1);
-		muestra1.getOpiniones().add(opinion3);
-		
-		assertTrue(verBasica.puedeOpinarSobreLa(user2, muestra1));
-		
-		assertFalse(verBasica.puedeOpinarSobreLa(user1, muestra1));
-		assertFalse(verBasica.puedeOpinarSobreLa(user3, muestra1));
-		
-	}
-	
-	@Test
-	void testPuedeOpinarSobreLaMuestraBasicoV2() {
-		
-		muestraMock = mock(Muestra.class);
-		usuarioMock = mock(Usuario.class);
-		when(muestraMock.cantidadDeExpertosQueOpinaron()).thenReturn(1);
-		when(muestraMock.isMuestraVerificada()).thenReturn(false);
-		when(muestraMock.cantidadDeVecesApareceEl(user2)).thenReturn(0);
-		when(muestraMock.cantidadDeVecesApareceEl(user1)).thenReturn(6);
-		when(muestraMock.cantidadDeVecesApareceEl(user3)).thenReturn(3);
-		
-		assertTrue(verBasica.puedeOpinarSobreLa(user2, muestraMock));
-		
-		assertFalse(verBasica.puedeOpinarSobreLa(user1, muestraMock));
-		assertFalse(verBasica.puedeOpinarSobreLa(user3, muestraMock));
-		
-	}
-	
-	@Test
-	void testNoPuedeOpinarSobreLaMuestraBasico() {
-		
-		muestraMock = mock(Muestra.class);
-		usuarioMock = mock(Usuario.class);
-		when(muestraMock.cantidadDeExpertosQueOpinaron()).thenReturn(2);
-		when(muestraMock.isMuestraVerificada()).thenReturn(true);
-		when(muestraMock.cantidadDeVecesApareceEl(user2)).thenReturn(0);
-		when(muestraMock.cantidadDeVecesApareceEl(user1)).thenReturn(0);
-		when(muestraMock.cantidadDeVecesApareceEl(user3)).thenReturn(0);
-		
-		assertFalse(verBasica.puedeOpinarSobreLa(user2, muestraMock));
-		
-		assertFalse(verBasica.puedeOpinarSobreLa(user1, muestraMock));
-		assertFalse(verBasica.puedeOpinarSobreLa(user3, muestraMock));
-		
-	}
-	
-	@Test
-	void testPuedeOpinarSobreLaMuestraExperto() {
-		
-		when(user1.getIdUser()).thenReturn(111);
-		when(user2.getIdUser()).thenReturn(222);
-		when(user3.getIdUser()).thenReturn(333);
-		when(user1.tipoDeConocimiento()).thenReturn("Basico");
-		when(user2.tipoDeConocimiento()).thenReturn("Experto");
-		when(user3.tipoDeConocimiento()).thenReturn("Basico");
-		when(opinion1.getUser()).thenReturn(user1);
-		when(opinion2.getUser()).thenReturn(user2);
-		when(opinion3.getUser()).thenReturn(user3);
-		
-		muestra1 = new Muestra(user1, null, null, opinion1);
-		muestra1.getOpiniones().add(opinion3);
-		
-		assertTrue(verExperto.puedeOpinarSobreLa(user2, muestra1));
-		
-		assertFalse(verExperto.puedeOpinarSobreLa(user1, muestra1));
-		assertFalse(verExperto.puedeOpinarSobreLa(user3, muestra1));
-		
-	}
-	
-	@Test
-	void testPuedeOpinarSobreLaMuestraBasicoConMuestraVerificada() {
-		
-		muestraMock = mock(Muestra.class);
-		usuarioMock = mock(Usuario.class);
-		when(muestraMock.cantidadDeExpertosQueOpinaron()).thenReturn(1);
-		when(muestraMock.isMuestraVerificada()).thenReturn(true);
-		when(muestraMock.cantidadDeVecesApareceEl(user2)).thenReturn(0);
-		when(muestraMock.cantidadDeVecesApareceEl(user1)).thenReturn(0);
-		when(muestraMock.cantidadDeVecesApareceEl(user3)).thenReturn(0);
-		
-		
-		assertFalse(verBasica.puedeOpinarSobreLa(user2, muestraMock));
-		
-		assertFalse(verBasica.puedeOpinarSobreLa(user1, muestraMock));
-		assertFalse(verBasica.puedeOpinarSobreLa(user3, muestraMock));
-		
-	}
-	
-	@Test
-	void testPuedeOpinarSobreLaMuestraExperoCon2ExpertosYaOpinaron() {
-		
-		when(user1.tipoDeConocimiento()).thenReturn("Experto");
-		when(user2.tipoDeConocimiento()).thenReturn("Basico");
-		when(user3.tipoDeConocimiento()).thenReturn("Experto");
-		when(opinion1.getUser()).thenReturn(user1);
-		when(opinion2.getUser()).thenReturn(user2);
-		when(opinion3.getUser()).thenReturn(user3);
-		
-		muestra1 = new Muestra(user1, null, null, opinion1);
-		muestra1.getOpiniones().add(opinion3);
-		
-		assertFalse(verExperto.puedeOpinarSobreLa(user2, muestra1));
-		
-		assertFalse(verExperto.puedeOpinarSobreLa(user1, muestra1));
-		assertFalse(verExperto.puedeOpinarSobreLa(user3, muestra1));
-		
-	}
-	
-	@Test
-	void verificarMuestra() {
-		
-		when(user1.tipoDeConocimiento()).thenReturn("Experto");
-		when(user2.tipoDeConocimiento()).thenReturn("Basico");
-		when(user3.tipoDeConocimiento()).thenReturn("Experto");
-		
-		/*when(opinion1.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Experto");
-		when(opinion2.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Basico");
-		when(opinion3.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Experto");
-		
-		when(opinion1.nombreDelInsecto()).thenReturn("Vichuca");
-		when(opinion2.nombreDelInsecto()).thenReturn("NoVichuca");
-		when(opinion3.nombreDelInsecto()).thenReturn("Vichuca");
-		
-		when(opinion1.getUser()).thenReturn(user1);
-		when(opinion2.getUser()).thenReturn(user2);
-		when(opinion3.getUser()).thenReturn(user3);
-		
-		muestra1 = new Muestra(user1, null, null, opinion1);
-		muestra1.getOpiniones().add(opinion2);
-		muestra1.getOpiniones().add(opinion3);
-		
-		assertEquals(2,muestra1.cantidadDeExpertosQueOpinaron());
-		assertFalse(muestra1.isMuestraVerificada());
-		
-		assertEquals("Vichuca",verExperto.opinionActual(muestra1).nombreDelInsecto());
-		assertTrue(verExperto.masDe2votoPorUnaOpinion(muestra1));
-		
-		verExperto.verificar(muestra1);
-		assertTrue(muestra1.isMuestraVerificada());
-	}
-	
-*/
+
+
 	class VerificacionTest {
 	
 	private Usuario user1;
@@ -336,12 +23,11 @@ class VerificacionTest {
 	private ConocimientoExperto experto;
 	private ConocimientoEspecialista especialista;
 	private Historial historial1;
-	private EvaluadorDeConocimiento evaluador1;
 
 	
 	@BeforeEach
 	public void setUp() {
-		
+		historial1 = new Historial();
 		user1 = mock(Usuario.class);
 		user2 = mock(Usuario.class);
 		user3 = mock(Usuario.class);
@@ -354,10 +40,7 @@ class VerificacionTest {
 		basico = new ConocimientoBasico();
 		experto = new ConocimientoExperto();
 		especialista = new ConocimientoEspecialista();
-		historial1 = mock(Historial.class);
-		evaluador1 = mock(EvaluadorDeConocimiento.class);
 		ConfiguracionHistorial.getConfiguracion().setHistorial(historial1);
-		when(historial1.getEvaluador()).thenReturn(evaluador1);
 
 	}
 	
@@ -394,6 +77,33 @@ class VerificacionTest {
 		
 		assertEquals(2,muestra1.cantidadDeBasicosQueOpinaron());
 		
+	}
+	
+	
+	@Test
+	void test3BasicosOpninaron() {
+		
+		when(user1.getConocimiento()).thenReturn(basico);
+		when(user2.getConocimiento()).thenReturn(basico);
+		when(user3.getConocimiento()).thenReturn(basico);
+		
+		when(opinion1.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Basico");
+		when(opinion2.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Basico");
+		when(opinion3.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Basico");
+		
+		when(opinion1.getUser()).thenReturn(user1);
+		when(opinion2.getUser()).thenReturn(user2);
+		when(opinion3.getUser()).thenReturn(user3);
+		
+		muestra1 = new Muestra(user1, null, null, opinion1);
+		muestra1.cambiarEstadoVerificacion();
+		muestra1.getOpiniones().add(opinion2);
+		muestra1.cambiarEstadoVerificacion();
+		muestra1.getOpiniones().add(opinion3);
+		muestra1.cambiarEstadoVerificacion();
+		
+		assertEquals(3,muestra1.cantidadDeBasicosQueOpinaron());
+		assertEquals("Alto", muestra1.getVerificado().getNivelDeVerificacion());
 	}
 	
 	@Test
@@ -571,10 +281,10 @@ class VerificacionTest {
 		muestra1.getOpiniones().add(opinion3);
 		muestra1.cambiarEstadoVerificacion();
 		
-		assertTrue(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user2, muestra1));
+		assertTrue(muestra1.getVerificado().puedeOpinarSobreLa(user2, muestra1));
 		
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user1, muestra1));
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user3, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user1, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user3, muestra1));
 	
 	}
 	
@@ -599,11 +309,36 @@ class VerificacionTest {
 		muestra1.cambiarEstadoVerificacion();
 		
 		assertEquals(2,muestra1.cantidadDeExpertosQueOpinaron());
-		assertTrue(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user2, muestra1));
+		assertTrue(muestra1.getVerificado().puedeOpinarSobreLa(user2, muestra1));
 		
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user1, muestra1));
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user3, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user1, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user3, muestra1));
 
+		
+	}
+	
+	@Test
+	void testPuedeOpinarSobreLaMuestraNoVerificada() {
+		
+		NoVerificado noVerificado = new NoVerificado();
+		
+		when(user1.tipoDeConocimiento()).thenReturn("Experto");
+		when(user2.tipoDeConocimiento()).thenReturn("Basico");
+		when(user3.tipoDeConocimiento()).thenReturn("Experto");
+		when(opinion1.getUser()).thenReturn(user1);
+		when(opinion2.getUser()).thenReturn(user2);
+		when(opinion3.getUser()).thenReturn(user3);
+		when(opinion1.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Experto");
+		when(opinion2.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Basico");
+		when(opinion3.tipoDeConocimientoAlaHoraDeOpinar()).thenReturn("Experto");
+		
+		muestra1 = new Muestra(user1, null, null, opinion1);
+		muestra1.setVerificado(noVerificado);
+		
+		assertTrue(muestra1.getVerificado().puedeOpinarSobreLa(user2, muestra1));
+		
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user1, muestra1));
+		assertTrue(muestra1.getVerificado().puedeOpinarSobreLa(user3, muestra1));
 		
 	}
 	
@@ -625,10 +360,10 @@ class VerificacionTest {
 		muestra1.cambiarEstadoVerificacion();
 		
 		
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user2, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user2, muestra1));
 		
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user1, muestra1));
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user3, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user1, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user3, muestra1));
 		
 	}
 	
@@ -653,10 +388,10 @@ class VerificacionTest {
 		muestra1.getOpiniones().add(opinion3);
 		muestra1.cambiarEstadoVerificacion();
 		
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user2, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user2, muestra1));
 		
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user1, muestra1));
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user3, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user1, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user3, muestra1));
 
 	}
 	
@@ -705,7 +440,7 @@ class VerificacionTest {
 		assertTrue(muestra1.isMuestraVerificada());
 		
 		assertEquals("Vichuca",muestra1.opinionActual().nombreDelInsecto());
-		assertFalse(muestra1.getVerificado().getVerificado().puedeOpinarSobreLa(user2, muestra1));
+		assertFalse(muestra1.getVerificado().puedeOpinarSobreLa(user2, muestra1));
 		
 		muestra1.cambiarEstadoVerificacion();
 		assertEquals("Vichuca",muestra1.opinionActual().nombreDelInsecto());
@@ -721,14 +456,16 @@ class VerificacionTest {
 	@Test
 	public void testVerificacionBasicoBasicoExperto(){
 		
+		
+		ConocimientoBasico basicoActual = new ConocimientoBasico();
 		RespuestaImagenPocoClara pocoClara = new RespuestaImagenPocoClara();
-		ChincheFoliada foliada = new ChincheFoliada();
+		ChinceFoliada foliada = new ChinceFoliada();
 		
 		Usuario usuarioA = new Usuario(111, null);
-		usuarioA.setConocimiento(basico);
+		usuarioA.setConocimiento(basicoActual);
 	
 		Usuario usuarioB = new Usuario(222, null);
-		usuarioB.setConocimiento(basico);
+		usuarioB.setConocimiento(basicoActual);
 		
 		Usuario usuarioC = new Usuario(333, null);
 		usuarioC.setConocimiento(experto);
@@ -742,6 +479,8 @@ class VerificacionTest {
 		assertEquals("Bajo",muestra1.getNivelDeVerificacion());
 		
 		usuarioB.opinarSobreLaMuestra(muestra1, opinionB);
+	
+		assertEquals(2,muestra1.cantidadDeBasicosQueOpinaron());
 		
 		assertEquals("Medio",muestra1.getNivelDeVerificacion());
 		assertFalse(muestra1.isMuestraVerificada());
@@ -757,7 +496,7 @@ class VerificacionTest {
 	public void testVerificacionExpertoBasicoExpero(){
 		
 		RespuestaImagenPocoClara pocoClara = new RespuestaImagenPocoClara();
-		ChincheFoliada foliada = new ChincheFoliada();
+		ChinceFoliada foliada = new ChinceFoliada();
 		
 		Usuario usuarioA = new Usuario(111, null);
 		usuarioA.setConocimiento(experto);
@@ -793,9 +532,9 @@ class VerificacionTest {
 	}
 	@Test
 	public void testVerificacionEspecialistaBasicoExperto(){
-		
+				
 		RespuestaImagenPocoClara pocoClara = new RespuestaImagenPocoClara();
-		ChincheFoliada foliada = new ChincheFoliada();
+		ChinceFoliada foliada = new ChinceFoliada();
 		
 		Usuario usuarioA = new Usuario(111, null);
 		usuarioA.setConocimiento(especialista);

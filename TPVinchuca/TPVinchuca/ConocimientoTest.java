@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 
 
+
 public class ConocimientoTest {
 	
 	private ConocimientoBasico concBasico;
@@ -18,13 +19,10 @@ public class ConocimientoTest {
 	private Muestra muestra1;
 	private Opinion opinion1;
 	private Opinion opinion2;	
-	private Verificacion verificacion;
 	private VerificacionParcialBasico verBasico;
 	private VerificadoParcialExperto verExperto;
 	
-//	private VerificacionExperto verificacionExperto;
-//	private VerificacionBasica verificacionBasica;
-//	private VerificacionBasica verificacionBasicaMock;
+
 	
 	@BeforeEach
 	public void setUp() {
@@ -37,7 +35,6 @@ public class ConocimientoTest {
 		concBasico = new ConocimientoBasico();
 		concExperto = new ConocimientoExperto();
 		concEspecialista = new ConocimientoEspecialista();
-		verificacion = new Verificacion();
 		verBasico = new VerificacionParcialBasico();
 		verExperto = new VerificadoParcialExperto();
 	}
@@ -85,9 +82,7 @@ public class ConocimientoTest {
 		user.setConocimiento(concBasico);
 		muestra1 = new Muestra(user, null, null, opinion1);
 		
-		verificacion.setVerificado(verBasico);
-		muestra1.setVerificado(verificacion);
-		muestra1.setVerificado(verificacion );
+		muestra1.setVerificado(verBasico);
 		
 		assertEquals(1 ,muestra1.getOpiniones().size());
 		
@@ -115,8 +110,7 @@ public class ConocimientoTest {
 		when(opinion2.getUser()).thenReturn(user2);
 		
 		muestra1 = new Muestra(user2, null, null, opinion2);
-		verificacion.setVerificado(verExperto);
-		muestra1.setVerificado(verificacion);
+		muestra1.setVerificado(verExperto);
 		concExperto.valorarMuestra(user, muestra1, opinion1);
 		assertEquals(2 ,muestra1.getOpiniones().size());
 		
@@ -135,8 +129,7 @@ public class ConocimientoTest {
 		when(opinion2.getUser()).thenReturn(user2);
 		
 		muestra1 = new Muestra(user2, null, null, opinion1);
-		verificacion.setVerificado(verExperto);
-		muestra1.setVerificado(verificacion);
+		muestra1.setVerificado(verExperto);
 		concEspecialista.valorarMuestra(user, muestra1, opinion2);
 		assertEquals(2 ,muestra1.getOpiniones().size());
 		

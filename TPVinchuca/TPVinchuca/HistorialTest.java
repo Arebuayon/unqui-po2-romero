@@ -8,8 +8,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+
 
 
 
@@ -21,6 +23,7 @@ public class HistorialTest {
 	private Muestra muestra2;
 	private Muestra muestra3;
 	private Historial historial1;
+	
 	private Usuario user;
 	private Usuario user2;
 	private Usuario user3;
@@ -28,19 +31,30 @@ public class HistorialTest {
 	private Ubicacion ubicacion1;
 	private Ubicacion ubicacion2;
 	private Ubicacion ubicacion3;
+	private ZonaDeCobertura zona1;
+	private ZonaDeCobertura zona2;
+	
+	
 	
 	@BeforeEach
 	public void setUp() {
-		ubicacion1 = mock(Ubicacion.class);
-		ubicacion2 = mock(Ubicacion.class);
-		ubicacion3 = mock(Ubicacion.class);
-		muestra1 = new Muestra(user, null,	ubicacion1, null);
-		muestra2 = new Muestra(user2, null, ubicacion2, null);
-		muestra3 = new Muestra(user3, null, ubicacion3, null);
+		historial1 = new Historial();
+		
+		ubicacion1 = new Ubicacion(1000, 500);
+		ubicacion2 = new Ubicacion(3000, 500);
+		ubicacion3 = new Ubicacion(6000, 500);
+		
+		zona1 = mock(ZonaDeCobertura.class);
+		zona2 = mock(ZonaDeCobertura.class);
+
 		user = mock(Usuario.class);
 		user2 = mock(Usuario.class);
 		user3 = mock(Usuario.class);
-		historial1 = new Historial();
+		
+		muestra1 = new Muestra(user, null,	ubicacion1, null);
+		muestra2 = new Muestra(user2, null, ubicacion2, null);
+		muestra3 = new Muestra(user3, null, ubicacion3, null);
+		
 		//opinion1 = mock(Opinion.class);
 	}
 	
@@ -57,6 +71,16 @@ public class HistorialTest {
 		assertEquals(1,historial1.getListaDeMuestras().size());
 		
 	}
+	@Test
+	public void testElHistorialDevuelveSuInformacion() {
+		EvaluadorDeConocimiento evaluadorDeConocimiento1 = new EvaluadorDeConocimiento();
+		historial1.setEvaluadorDeConocimiento(evaluadorDeConocimiento1);
+		historial1.getListaDeZonas().add(zona1);
+		historial1.getListaDeZonas().add(zona2);
+		assertEquals(2 , historial1.getListaDeZonas().size());
+		assertEquals(evaluadorDeConocimiento1 , historial1.getEvaluador());
+	}
+	
 	
 	@Test
 	public void historialPrimeraVezQueParticipa() {
@@ -100,21 +124,20 @@ public class HistorialTest {
 	
 	@Test
 	public void testSePuedenPedirLasMuestrasAMenosDeXKmDeMuestra() {
-	
-		historial1 = new Historial();
+		
+		
 		ArrayList<Muestra> listaDeRespuesta = new ArrayList<Muestra>();
 		listaDeRespuesta.add(muestra3);
-	//	muestra1.setUbicacion(ubicacion1);
-	//	muestra2.setUbicacion(ubicacion2);
-	//	muestra3.setUbicacion(ubicacion3);
+		
+		
 		historial1.getListaDeMuestras().add(muestra1);
 		historial1.getListaDeMuestras().add(muestra2);
 		historial1.getListaDeMuestras().add(muestra3);
 		
-		when(muestra1.getUbicacion().distanciaAOtraUbicacion(muestra2.getUbicacion())).thenReturn(50.00);
-		when(muestra1.getUbicacion().distanciaAOtraUbicacion(muestra3.getUbicacion())).thenReturn(150.00);
+
 		
-		assertEquals(listaDeRespuesta , historial1.muestrasAMenosDeXKmDeMuestra(muestra1, 100));
+		
+		assertEquals(listaDeRespuesta , historial1.muestrasAMenosDeXKmDeMuestra(muestra1, 10000.00));
 	}
 	
 	@Test
@@ -183,5 +206,21 @@ public class HistorialTest {
 	public void testElHistorialNotificaNuevaValidacion() {}
 	
 	@Test
-	public void testElHistorialDevuelveMuestrasDeUnaZona() {}
+	public void testElHistorialDevuelveMuestrasDeUnaZona() {
+		
+		
+		historial1.getListaDeMuestras().add(muestra1);
+		historial1.getListaDeMuestras().add(muestra2);
+		historial1.getListaDeMuestras().add(muestra3);
+		
+		
+		when(zona1.getEpicentro()).thenReturn(ubicacion1);
+		when(zona1.getRadio()).thenReturn(100);
+		
+		ArrayList<Muestra> listaDeRespuesta = new ArrayList<Muestra>();
+		listaDeRespuesta.add(muestra1);
+		
+		assertEquals(listaDeRespuesta , historial1.muestrasDeZona(zona1));
+		
+	}
 }
