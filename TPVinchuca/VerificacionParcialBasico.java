@@ -1,8 +1,7 @@
 package ar.edu.unq.po2.TPVinchuca;
-
 public class VerificacionParcialBasico extends EstadoDeVerificacion {
 	
-	private static String nivel = "Medio";
+	private String nivel = "Medio";
 
 	public Opinion opinionActual(Muestra muestra) {
 		int contadorDeRespuestas = 0;
@@ -20,15 +19,14 @@ public class VerificacionParcialBasico extends EstadoDeVerificacion {
 	
 	public void verificar(Muestra muestra) {
 		EstadoDeVerificacion estado = new VerificadoParcialExperto();
-			if(!muestra.opinaronTodosBasicos()) {
-				muestra.getVerificado().setVerificado(estado);
+			if(muestra.cantidadDeBasicosQueOpinaron() > 2) {
+				this.setNivelDeVerificacion("Alto");
 			}else {
-				if(muestra.cantidadDeBasicosQueOpinaron() > 3) {
-					this.setNivelDeVerificacion("Alto");
+				if(!muestra.opinaronTodosBasicos()) {
+					muestra.setVerificado(estado);
 				}
 			}
 	}
-
 
 	@Override
 	public boolean puedeOpinarSobreLa(Usuario user, Muestra muestra) {

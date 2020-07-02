@@ -23,9 +23,17 @@ public class Historial {
 	public EvaluadorDeConocimiento getEvaluador() {
 		return evaluador;
 	}
-
+	
+	public void setEvaluadorDeConocimiento(EvaluadorDeConocimiento evaluadorNuevo) {
+		this.evaluador = evaluadorNuevo;
+	}
+	
 	public List<Muestra> getListaDeMuestras() {
-		return listaDeMuestras;
+		return this.listaDeMuestras;
+	}
+	
+	public ArrayList<ZonaDeCobertura> getListaDeZonas() {
+		return listaDeZonas;
 	}
 
 	public void agregarMuestra(Muestra muestra) {
@@ -130,7 +138,7 @@ public class Historial {
 	
 	
 	public List<Muestra> muestrasAMenosDeXKmDeMuestra(Muestra muestra , double distancia){
-		return listaDeMuestras.stream().filter(m -> m.getUbicacion().distanciaAOtraUbicacion(muestra.getUbicacion()) < distancia).collect(Collectors.toList());
+		return this.listaDeMuestras.stream().filter(m -> m.getUbicacion().distanciaAOtraUbicacion(muestra.getUbicacion()) < distancia && m != muestra).collect(Collectors.toList());
 		
 	}
 

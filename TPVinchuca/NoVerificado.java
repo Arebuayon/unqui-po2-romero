@@ -18,11 +18,11 @@ public class NoVerificado extends EstadoDeVerificacion {
 	public void verificar(Muestra muestra) {
 		if(muestra.opinaronTodosBasicos()) {
 			EstadoDeVerificacion estado = new VerificacionParcialBasico();
-			muestra.getVerificado().setVerificado(estado);
+			muestra.setVerificado(estado);
 		}else{
 			if(muestra.opinaronExpertos()) {
 				EstadoDeVerificacion estado2 = new VerificadoParcialExperto();
-				muestra.getVerificado().setVerificado(estado2);
+				muestra.setVerificado(estado2);
 			}
 		}
 	}

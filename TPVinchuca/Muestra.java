@@ -15,10 +15,9 @@ public class Muestra {
 	private BufferedImage fotoDelInsecto;
 	private Ubicacion ubicacion;
 	private LocalDate fechaCreada;
-	private Verificacion verificado = new Verificacion();
+	private EstadoDeVerificacion verificado = new NoVerificado();
 	private ArrayList<Opinion> listaDeOpiniones = new ArrayList<Opinion>();
 //	private String nivelDeVerificacion; 
-	
 	
 	
 	public Muestra(Usuario user, BufferedImage fotoDelInsecto, Ubicacion ubicacion,Opinion opinion) {
@@ -28,6 +27,15 @@ public class Muestra {
 		this.ubicacion = ubicacion;
 		this.fechaCreada = LocalDate.now();
 		this.listaDeOpiniones.add(opinion);
+	}
+	
+	
+	public void setVerificado(EstadoDeVerificacion verificado) {
+		this.verificado = verificado;
+	}
+
+	public EstadoDeVerificacion getVerificado() {
+		return verificado;
 	}
 
 	public void setFechaCreada(LocalDate fechaCreada) {
@@ -43,7 +51,7 @@ public class Muestra {
 	}
 	
 	public String getNivelDeVerificacion(){
-		return this.getVerificado().getVerificado().getNivelDeVerificacion();
+		return this.getVerificado().getNivelDeVerificacion();
 	}
 	
 	public BufferedImage getFotoDelInsecto() {
@@ -62,15 +70,6 @@ public class Muestra {
 		return fechaCreada;
 	}
 
-	public Verificacion getVerificado() {
-		return verificado;
-	}
-
-	public void setVerificado(Verificacion verificado) {
-		this.verificado = verificado;
-		
-	}
-	
 	public Opinion opinionActual() {
 		return this.getVerificado().opinionActual(this);
 	}
@@ -166,7 +165,7 @@ public class Muestra {
 	}
 	
 	public boolean isMuestraVerificada() {
-		return this.getVerificado().muestraYaVerificada();
+		return this.getVerificado().yaEstaVerifacado();
 	}
 /*	
 	public void opinarSobreLaMuestra(Opinion opinion) {
@@ -195,4 +194,7 @@ public class Muestra {
 		return this.getOpiniones().stream().map(opinion -> opinion.getFechaEnviada()).collect(Collectors.toList());
 	}
 	 
+	public boolean equals(Muestra muestra) {
+	    return (this == muestra);
+	}
 }

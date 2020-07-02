@@ -19,7 +19,7 @@ public class VerificadoParcialExperto extends EstadoDeVerificacion {
 	public void verificar(Muestra muestra) {
 		EstadoDeVerificacion estado = new Verificado();
 		if(this.masDe2votoPorUnaOpinion(muestra)) {
-			muestra.getVerificado().setVerificado(estado);
+			muestra.setVerificado(estado);
 		}
 	}
 
